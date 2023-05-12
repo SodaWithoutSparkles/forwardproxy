@@ -69,23 +69,24 @@ _Default: no hiding; Header in form of `Via: 2.0 caddy` will be sent out._
 
 ### Access Control
 
-- **ports [integer] [integer]...**  
+- `ports [integer] [integer]...`
 Specifies ports forwardproxy will whitelist for all requests. Other ports will be forbidden.  
 _Default: no restrictions._
 
-- **acl {  
-&nbsp;&nbsp;&nbsp;&nbsp;acl_directive  
-&nbsp;&nbsp;&nbsp;&nbsp;...  
-&nbsp;&nbsp;&nbsp;&nbsp;acl_directive  
-}**  
+-     acl {  
+        acl_directive  
+        ...  
+        acl_directive
+      }
+
 Specifies **order** and rules for allowed destination IP networks, IP addresses and hostnames.
 The hostname in each forwardproxy request will be resolved to an IP address,
 and caddy will check the IP address and hostname against the directives in order until a directive matches the request.
 acl_directive may be:
-  - **allow [ip or subnet or hostname] [ip or subnet or hostname]...**
-  - **allow_file /path/to/whitelist.txt**
-  - **deny [ip or subnet or hostname] [ip or subnet or hostname]...**
-  - **deny_file /path/to/blacklist.txt**
+  - `allow [ip or subnet or hostname] [ip or subnet or hostname]...`
+  - `allow_file /path/to/whitelist.txt`
+  - `deny [ip or subnet or hostname] [ip or subnet or hostname]...`
+  - `deny_file /path/to/blacklist.txt`
 
   If you don't want unmatched requests to be subject to the default policy, you could finish
   your acl rules with one of the following to specify action on unmatched requests:
@@ -103,8 +104,8 @@ acl_directive may be:
 _Default policy:_  
 ```
 acl {  
-&nbsp;&nbsp;&nbsp;&nbsp;deny 10.0.0.0/8 127.0.0.0/8 172.16.0.0/12 192.168.0.0/16 ::1/128 fe80::/10  
-&nbsp;&nbsp;&nbsp;&nbsp;allow all  
+    deny 10.0.0.0/8 127.0.0.0/8 172.16.0.0/12 192.168.0.0/16 ::1/128 fe80::/10  
+    allow all  
 }  
 ```
 _Default deny rules intend to prohibit access to localhost and local networks and may be expanded in future._
