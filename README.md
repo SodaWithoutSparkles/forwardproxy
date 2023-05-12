@@ -39,7 +39,7 @@ Simple example that uses forward_proxy as first priority and as second just show
 ### Security
 
 - **basic_auth [user] [password]**  
-Sets basic HTTP auth credentials. This property may be repeated multiple times. Note that this is different from Caddy's built-in `basic_auth` directive. BE SURE TO CHECK THE NAME OF THE SITE THAT IS REQUESTING CREDENTIALS BEFORE YOU ENTER THEM.  
+Sets basic HTTP auth credentials. This property can only be supplied once. Note that this is different from Caddy's built-in `basic_auth` directive. BE SURE TO CHECK THE NAME OF THE SITE THAT IS REQUESTING CREDENTIALS BEFORE YOU ENTER THEM.  
 _Default: no authentication required._
 
 - **probe_resistance [secretlink.tld]**  
@@ -101,10 +101,12 @@ acl_directive may be:
   This policy applies to all requests except requests to the proxy's own domain and port.
   Whitelisting/blacklisting of ports on per-host/IP basis is not supported.  
 _Default policy:_  
+```
 acl {  
 &nbsp;&nbsp;&nbsp;&nbsp;deny 10.0.0.0/8 127.0.0.0/8 172.16.0.0/12 192.168.0.0/16 ::1/128 fe80::/10  
 &nbsp;&nbsp;&nbsp;&nbsp;allow all  
 }  
+```
 _Default deny rules intend to prohibit access to localhost and local networks and may be expanded in future._
 
 ### Timeouts
